@@ -17,7 +17,9 @@ del 40 cumpleaños de Sergio en Benidorm (17–21 de septiembre de 2027).
   fallback en la sección `#rsvp`).
 - Punto de encuentro, alojamiento y cómo llegar (sección `#logistica`).
 - Texto de "El plan".
-- Imágenes en `assets/img/`.
+- Fotos en `assets/img/`: son placeholders libres de derechos (Pexels). Sustitúyelas
+  por fotos reales de Benidorm/del grupo manteniendo el mismo nombre de archivo,
+  o cambia la ruta en `.scene-img-*` en `css/style.css`.
 
 ## Previsualizar en local
 

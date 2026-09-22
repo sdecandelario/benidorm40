@@ -4,59 +4,301 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>¡Benidorm 40! [NOMBRE DEL EVENTO]</title>
-  <meta name="description" content="Nos vamos a Benidorm a celebrar el 40 cumpleaños de Sergio. 17-21 de septiembre de 2027." />
+  <meta name="description" content="La leyenda cumple 40. Cuatro días de playa, fiesta y misterio en Benidorm. 17-21 de septiembre de 2027." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <header class="hero">
-    <div class="hero-content">
-      <p class="hero-eyebrow">17 – 21 de septiembre de 2027</p>
-      <h1>[NOMBRE DEL EVENTO]</h1>
-      <p class="hero-subtitle">Un finde en Benidorm para celebrar mis 40 🎉</p>
-      <div id="countdown" class="countdown" aria-live="polite"></div>
-      <a href="#rsvp" class="btn-primary">Apúntate</a>
-    </div>
-  </header>
+  <!-- Fondo épico fijo (parallax): capa ambiente continua + "escenas" de imagen
+       por capítulo que aparecen/desaparecen (crossfade) según el scroll, al
+       estilo apple.com/iphone. TODO: si quieres sustituir por fotos reales de
+       Benidorm, añade una imagen a assets/img/ y pon background-image en el
+       .scene-img correspondiente en css/style.css. -->
+  <div class="scene" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="blob blob-4"></span>
+    <span class="blob blob-5"></span>
+    <span class="confetti-pattern"></span>
+    <span class="stars"></span>
+  </div>
 
-  <main>
+  <div class="scene-images" aria-hidden="true">
+    <div class="scene-img scene-img-hero" data-scene-for="hero"></div>
+    <div class="scene-img scene-img-plan" data-scene-for="plan"></div>
+    <div class="scene-img scene-img-logistica" data-scene-for="logistica"></div>
+    <div class="scene-img scene-img-rsvp" data-scene-for="rsvp"></div>
+  </div>
 
-    <section class="section" id="plan">
-      <h2>El plan</h2>
-      <p>
-        [PLACEHOLDER: describe aquí el plan del finde — playa, fiesta, planes concretos.
-        Ej: "Nos vamos cuatro días a Benidorm a desconectar, playa de día y fiesta de noche.
-        No hace falta traer nada más que ganas de pasarlo bien."]
+  <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+  <section class="panel panel-hero" id="hero">
+    <span class="giant-number" aria-hidden="true">40</span>
+
+    <span class="floaty" data-speed="0.4" style="top:10%; left:6%;">🍹</span>
+    <span class="floaty" data-speed="0.7" style="top:65%; left:12%; font-size:2.6rem;">🌴</span>
+    <span class="floaty" data-speed="0.3" style="top:18%; left:88%;">🎉</span>
+    <span class="floaty" data-speed="0.6" style="top:72%; left:90%; font-size:2rem;">🕺</span>
+    <span class="floaty" data-speed="0.5" style="top:6%; left:45%; font-size:1.8rem;">☀️</span>
+    <span class="floaty" data-speed="0.35" style="top:80%; left:50%; font-size:2.4rem;">🏖️</span>
+    <span class="floaty" data-speed="0.45" style="top:30%; left:4%; font-size:2rem;">🔮</span>
+    <span class="floaty" data-speed="0.5" style="top:45%; left:92%; font-size:2.2rem;">🎊</span>
+    <span class="floaty" data-speed="0.4" style="top:88%; left:20%; font-size:1.8rem;">🥳</span>
+    <span class="floaty" data-speed="0.6" style="top:14%; left:70%; font-size:1.6rem;">✨</span>
+    <span class="floaty" data-speed="0.5" style="top:55%; left:6%; font-size:1.8rem;">🍷</span>
+    <span class="floaty" data-speed="0.4" style="top:38%; left:94%; font-size:1.8rem;">💃</span>
+
+    <span class="sticker sticker-tape" style="top:6%; left:50%;">¡SAVE THE DATE!</span>
+
+    <figure class="postcard postcard-right reveal-item">
+      <img src="assets/img/hero-benidorm-aerial.jpg" alt="Vista aérea de Benidorm" loading="lazy" />
+      <figcaption class="postcard-caption">Benidorm, nos vemos allí</figcaption>
+    </figure>
+    <figure class="postcard postcard-left postcard-small reveal-item">
+      <img src="assets/img/extra-nightclub-confetti.jpg" alt="Fiesta con confeti" loading="lazy" />
+      <figcaption class="postcard-caption">Ambiente garantizado</figcaption>
+    </figure>
+
+    <div class="panel-content hero-content">
+      <div id="countdown" class="countdown countdown-hero reveal-item" aria-live="polite"></div>
+      <p class="hero-eyebrow reveal-item">17 – 21 de septiembre de 2027 · Benidorm</p>
+      <h1 class="reveal-item">[NOMBRE DEL EVENTO]</h1>
+      <p class="hero-subtitle reveal-item">
+        40 años dan para una leyenda. Cuatro días de playa, fiesta y recuerdos
+        que contaremos (exagerando un poco) el resto de nuestra vida.
       </p>
-    </section>
+      <p class="hero-mystery reveal-item">🔮 Nadie sabe exactamente qué va a pasar. Esa es la gracia.</p>
+      <a href="#rsvp" class="btn-primary reveal-item" id="rsvpCta">Yo me apunto 🙋</a>
+    </div>
+    <div class="hero-scroll-cue" aria-hidden="true">↓</div>
+  </section>
 
-    <section class="section section-alt" id="logistica">
-      <h2>Fechas y logística</h2>
-      <div class="logistica-grid">
-        <div class="logistica-item">
-          <h3>Fechas</h3>
-          <p>Viernes 17 a lunes 21 de septiembre de 2027</p>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>★ BENIDORM 2027 ★ 40 AÑOS DE LEYENDA ★ PLAYA · FIESTA · MISTERIO ★ SOLO SE CUMPLEN 40 UNA VEZ ★ TODO PUEDE PASAR ★</span>
+      <span>★ BENIDORM 2027 ★ 40 AÑOS DE LEYENDA ★ PLAYA · FIESTA · MISTERIO ★ SOLO SE CUMPLEN 40 UNA VEZ ★ TODO PUEDE PASAR ★</span>
+    </div>
+  </div>
+
+  <!-- Tira de fotos en bucle continuo: refuerza el "más recargada, más fotos". -->
+  <div class="photo-marquee" aria-hidden="true">
+    <div class="photo-marquee-track">
+      <img src="assets/img/hero-benidorm-aerial.jpg" alt="" loading="lazy" />
+      <img src="assets/img/extra-friends-beach.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-toast.jpg" alt="" loading="lazy" />
+      <img src="assets/img/plan-beach-umbrellas.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-yacht.jpg" alt="" loading="lazy" />
+      <img src="assets/img/extra-cocktail.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-palms.jpg" alt="" loading="lazy" />
+      <img src="assets/img/logistica-benidorm-dusk.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-neon.jpg" alt="" loading="lazy" />
+      <img src="assets/img/extra-nightclub-confetti.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-crowd.jpg" alt="" loading="lazy" />
+      <img src="assets/img/rsvp-fireworks-night.jpg" alt="" loading="lazy" />
+      <!-- duplicado para el bucle continuo -->
+      <img src="assets/img/hero-benidorm-aerial.jpg" alt="" loading="lazy" />
+      <img src="assets/img/extra-friends-beach.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-toast.jpg" alt="" loading="lazy" />
+      <img src="assets/img/plan-beach-umbrellas.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-yacht.jpg" alt="" loading="lazy" />
+      <img src="assets/img/extra-cocktail.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-palms.jpg" alt="" loading="lazy" />
+      <img src="assets/img/logistica-benidorm-dusk.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-neon.jpg" alt="" loading="lazy" />
+      <img src="assets/img/extra-nightclub-confetti.jpg" alt="" loading="lazy" />
+      <img src="assets/img/gallery-crowd.jpg" alt="" loading="lazy" />
+      <img src="assets/img/rsvp-fireworks-night.jpg" alt="" loading="lazy" />
+    </div>
+  </div>
+
+  <section class="panel panel-plan" id="plan">
+    <span class="floaty" data-speed="0.3" style="top:12%; left:10%; font-size:2rem;">🌊</span>
+    <span class="floaty" data-speed="0.55" style="top:70%; left:82%; font-size:2.2rem;">🍸</span>
+    <span class="floaty" data-speed="0.4" style="top:85%; left:15%; font-size:1.8rem;">🍕</span>
+    <span class="floaty" data-speed="0.5" style="top:15%; left:75%; font-size:1.8rem;">🐚</span>
+
+    <figure class="postcard postcard-left reveal-item">
+      <img src="assets/img/plan-beach-umbrellas.jpg" alt="Playa con sombrillas" loading="lazy" />
+      <figcaption class="postcard-caption">Playa & chiringuito</figcaption>
+    </figure>
+    <figure class="postcard postcard-right postcard-small reveal-item">
+      <img src="assets/img/extra-cocktail.jpg" alt="Cóctel de verano" loading="lazy" />
+      <figcaption class="postcard-caption">Los de sombrillita</figcaption>
+    </figure>
+
+    <div class="panel-content">
+      <h2 class="reveal-item">Los planes de la leyenda</h2>
+      <p class="reveal-item">
+        Nada de itinerarios cerrados ni relojes. La única misión es juntarnos,
+        celebrar por todo lo alto y dejar que el finde nos lleve por donde
+        quiera. Esto es lo que probablemente caiga (y lo que no, mejor):
+      </p>
+      <!-- Tablero 3x3: pasa el ratón (o toca en móvil) para girar la carta y
+           ver la foto detrás. "Alto secreto" ocupa el centro a propósito. -->
+      <div class="plan-grid">
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">🏖️</span>
+              <p>Playa sin prisa</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/plan-beach-umbrellas.jpg')"></div>
+          </div>
         </div>
-        <div class="logistica-item">
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">🍹</span>
+              <p>Cócteles de sombrillita</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/extra-cocktail.jpg')"></div>
+          </div>
+        </div>
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">🥘</span>
+              <p>Paella con mucho ambiente</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/gallery-toast.jpg')"></div>
+          </div>
+        </div>
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">🍷</span>
+              <p>Sangría sin medir</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/gallery-palms.jpg')"></div>
+          </div>
+        </div>
+        <div class="flip-card flip-card-mystery reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">❓</span>
+              <p>Alto secreto</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/rsvp-fireworks-night.jpg')">
+              <p class="mystery-reveal">Algo va a pasar. No sabemos el qué. Pero será legendario.</p>
+            </div>
+          </div>
+        </div>
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">💃</span>
+              <p>Flamenco improvisado</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/gallery-neon.jpg')"></div>
+          </div>
+        </div>
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">🪩</span>
+              <p>Fiesta hasta el amanecer</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/extra-nightclub-confetti.jpg')"></div>
+          </div>
+        </div>
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">🎤</span>
+              <p>Karaoke sin vergüenza</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/gallery-crowd.jpg')"></div>
+          </div>
+        </div>
+        <div class="flip-card reveal-item" tabindex="0">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="plan-icon">🚤</span>
+              <p>Excursión en barco</p>
+            </div>
+            <div class="flip-card-back" style="background-image:url('assets/img/gallery-yacht.jpg')"></div>
+          </div>
+        </div>
+      </div>
+      <p class="plan-tagline reveal-item">Sol. Playa. Amigos. Y algún que otro chupito de más.</p>
+    </div>
+  </section>
+
+  <section class="panel panel-logistica" id="logistica">
+    <span class="floaty" data-speed="0.35" style="top:15%; left:8%; font-size:1.8rem;">🌙</span>
+    <span class="floaty" data-speed="0.5" style="top:78%; left:85%; font-size:2rem;">🧭</span>
+    <span class="floaty" data-speed="0.4" style="top:35%; left:92%; font-size:1.8rem;">🎸</span>
+    <span class="floaty" data-speed="0.55" style="top:60%; left:6%; font-size:1.8rem;">🥘</span>
+
+    <figure class="postcard postcard-right reveal-item">
+      <img src="assets/img/logistica-benidorm-dusk.jpg" alt="Benidorm al atardecer" loading="lazy" />
+      <figcaption class="postcard-caption">Cuartel general, atardecer</figcaption>
+    </figure>
+    <figure class="postcard postcard-left postcard-small reveal-item">
+      <img src="assets/img/extra-friends-beach.jpg" alt="Amigos pasándolo bien en la playa" loading="lazy" />
+      <figcaption class="postcard-caption">Los de siempre</figcaption>
+    </figure>
+    <figure class="postcard postcard-left postcard-tiny reveal-item" style="top:18%;">
+      <img src="assets/img/gallery-yacht.jpg" alt="Barco en el mar" loading="lazy" />
+      <figcaption class="postcard-caption">O quizá un barco</figcaption>
+    </figure>
+
+    <div class="panel-content">
+      <h2 class="reveal-item">La operación, en detalle</h2>
+      <div class="logistica-grid">
+        <div class="logistica-item reveal-item">
+          <span class="logistica-icon">📅</span>
+          <h3>Fechas</h3>
+          <p>Viernes 17 a lunes 21 de septiembre de 2027 — cuatro días, ni uno menos.</p>
+        </div>
+        <div class="logistica-item reveal-item">
+          <span class="logistica-icon">📍</span>
           <h3>Punto de encuentro</h3>
           <p>[PLACEHOLDER: punto de encuentro]</p>
         </div>
-        <div class="logistica-item">
-          <h3>Alojamiento</h3>
+        <div class="logistica-item reveal-item">
+          <span class="logistica-icon">🏨</span>
+          <h3>Cuartel general</h3>
           <p>[PLACEHOLDER: hotel/apartamento, enlace de reserva si aplica]</p>
         </div>
-        <div class="logistica-item">
+        <div class="logistica-item reveal-item">
+          <span class="logistica-icon">🚗</span>
           <h3>Cómo llegar</h3>
           <p>[PLACEHOLDER: coche, tren, avión + aeropuerto de Alicante]</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="section" id="rsvp">
-      <h2>Apúntate</h2>
-      <p>Rellena el formulario para confirmar tu asistencia. ¡No faltes!</p>
+  <section class="panel panel-rsvp" id="rsvp">
+    <span class="floaty" data-speed="0.4" style="top:8%; left:80%; font-size:2rem;">🎆</span>
+    <span class="floaty" data-speed="0.6" style="top:75%; left:8%; font-size:2.2rem;">✨</span>
+    <span class="floaty" data-speed="0.5" style="top:20%; left:15%; font-size:1.8rem;">🌌</span>
+    <span class="floaty" data-speed="0.45" style="top:85%; left:75%; font-size:2rem;">🎇</span>
 
-      <div class="form-wrapper">
+    <figure class="postcard postcard-left reveal-item">
+      <img src="assets/img/rsvp-fireworks-night.jpg" alt="Fuegos artificiales de noche" loading="lazy" />
+      <figcaption class="postcard-caption">Fiesta, en grande</figcaption>
+    </figure>
+    <figure class="postcard postcard-right postcard-small reveal-item">
+      <img src="assets/img/gallery-neon.jpg" alt="Ambiente de neón nocturno" loading="lazy" />
+      <figcaption class="postcard-caption">Nos vemos ahí dentro</figcaption>
+    </figure>
+    <figure class="postcard postcard-right postcard-tiny reveal-item" style="top:82%;">
+      <img src="assets/img/gallery-crowd.jpg" alt="Multitud celebrando" loading="lazy" />
+      <figcaption class="postcard-caption">Todos a una</figcaption>
+    </figure>
+
+    <div class="panel-content">
+      <h2 class="reveal-item">¿Te apuntas a la locura?</h2>
+      <p class="reveal-item">Rellena el formulario y asegúrate tu plaza en la historia. Las leyendas no esperan.</p>
+      <p class="rsvp-mystery reveal-item">🕵️ Lo que pase en Benidorm... se contará en Benidorm.</p>
+
+      <div class="form-wrapper reveal-item">
         <!-- TODO: sustituir src por el Google Form real (Edit -> Send -> <> Embed HTML) -->
         <iframe
           src="https://docs.google.com/forms/d/e/PLACEHOLDER/viewform?embedded=true"
@@ -70,21 +312,23 @@
         </iframe>
       </div>
 
-      <p class="form-fallback">
+      <p class="form-fallback reveal-item">
         ¿No carga el formulario?
         <a href="https://docs.google.com/forms/d/e/PLACEHOLDER/viewform" target="_blank" rel="noopener">
           Ábrelo en una pestaña nueva
         </a>.
       </p>
-    </section>
-
-  </main>
+    </div>
+  </section>
 
   <footer class="footer">
-    <p>Iremos actualizando esta página según se confirmen más detalles.</p>
-    <p>Cualquier duda, escríbeme. — Sergio</p>
+    <p>Iremos actualizando esta página según se confirmen más detalles. Mantente atento.</p>
+    <p>Dudas, cotilleos o excusas para no venir — escríbeme. — Sergio 🎂</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
