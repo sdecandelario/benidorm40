@@ -445,7 +445,7 @@ a {
   top: 50%;
   margin: 0;
   z-index: 2;
-  width: 300px;
+  width: 328px;
   padding: 14px 14px 40px;
   background: #fffaf3;
   border-radius: 6px;
@@ -469,7 +469,7 @@ a {
 .postcard img {
   display: block;
   width: 100%;
-  height: 220px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 3px;
 }
@@ -494,27 +494,20 @@ a {
   --postcard-rotate: 6deg;
 }
 
-.postcard-small {
-  width: 190px;
-  top: 76%;
+/* Posiciones verticales: cada postal de una sección cae un poco más abajo
+   que la anterior (top-1 -> top-2 -> top-3) para que, combinado con la
+   alternancia izquierda/derecha del HTML, la secuencia de postales baje
+   en zigzag por la sección en vez de amontonarse. */
+.postcard-top-1 {
+  top: 40%;
 }
 
-.postcard-tiny {
-  width: 140px;
-  padding: 8px 8px 24px;
+.postcard-top-2 {
+  top: 66%;
 }
 
-.postcard-tiny img {
-  height: 100px;
-}
-
-.postcard-tiny .postcard-caption {
-  font-size: 0.75rem;
-  margin-top: 8px;
-}
-
-.postcard-small img {
-  height: 140px;
+.postcard-top-3 {
+  top: 84%;
 }
 
 /* Balanceo continuo (una vez visible) para que la postal se sienta viva. */
@@ -536,11 +529,7 @@ a {
     position: static;
     transform: rotate(var(--postcard-rotate, -4deg));
     margin: 0 auto 2rem;
-    width: 240px;
-  }
-
-  .postcard img {
-    height: 170px;
+    width: 268px;
   }
 
   .postcard.reveal-item {
@@ -552,22 +541,6 @@ a {
     opacity: 1;
     transform: rotate(var(--postcard-rotate, -4deg));
     animation: postcard-bob-mobile 5.5s ease-in-out infinite;
-  }
-
-  .postcard-small {
-    width: 190px;
-  }
-
-  .postcard-small img {
-    height: 140px;
-  }
-
-  .postcard-tiny {
-    width: 150px;
-  }
-
-  .postcard-tiny img {
-    height: 110px;
   }
 }
 
