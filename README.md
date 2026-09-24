@@ -12,7 +12,6 @@ del 40 cumpleaños de Sergio en Benidorm (17–21 de septiembre de 2027).
 
 ## Pendiente de rellenar
 
-- Nombre/lema del evento (`[NOMBRE DEL EVENTO]` en `index.html`).
 - Formulario real de Google Forms (sustituir el `src` del iframe y el enlace de
   fallback en la sección `#rsvp`).
 - Punto de encuentro, alojamiento y cómo llegar (sección `#logistica`).
