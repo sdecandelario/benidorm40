@@ -10,6 +10,10 @@
   --radius: 18px;
   --font-display: "Cinzel", Georgia, serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  /* 0 = arriba del todo (día), 1 = final de la página (noche). La actualiza
+     js/main.js en cada scroll (initProgressBar) y todo el cielo se deriva
+     de este único valor con calc(), sin tocar JS por elemento. */
+  --scroll-progress: 0;
 }
 
 * {
@@ -48,9 +52,8 @@ a {
   inset: 0;
   z-index: -1;
   overflow: hidden;
-  background: radial-gradient(circle at 20% 15%, #241b52 0%, transparent 55%),
-    radial-gradient(circle at 85% 75%, #3a1d3f 0%, transparent 50%),
-    linear-gradient(180deg, #0b1024 0%, #161233 45%, #2a1338 100%);
+  /* Sin fondo propio: el color base ahora lo pone .sky (día/noche); esta
+     capa solo aporta los blobs/estrellas/confeti decorativos por encima. */
 }
 
 .blob {
@@ -129,7 +132,8 @@ a {
     radial-gradient(1.5px 1.5px at 90% 85%, rgba(255, 255, 255, 0.5) 50%, transparent 100%);
   background-repeat: repeat;
   background-size: 100% 100%;
-  opacity: 0.6;
+  /* Invisibles de día, van apareciendo a medida que avanza la noche. */
+  opacity: calc(var(--scroll-progress) * 0.9 - 0.1);
 }
 
 /* Topos + confeti tejidos en el fondo: aportan color y aire veraniego/fiesta
@@ -152,6 +156,164 @@ a {
   .confetti-pattern {
     background-size: 110px 110px, 130px 130px, 100px 100px, 150px 150px, 120px 120px;
   }
+}
+
+/* ---------- Cielo día -> noche (continuo con el scroll) ---------- */
+/* Vive por debajo de .scene y .scene-images (z-index -2), así que nunca pisa
+   el contraste de texto de los paneles: el degradado opaco de cada
+   .scene-img-* sigue tapando el sol/luna/nubes donde haga falta. Todo se
+   deriva de --scroll-progress con calc(), sin animaciones ni JS por pieza. */
+
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sky-day,
+.sky-night {
+  position: absolute;
+  inset: 0;
+}
+
+.sky-day {
+  background: linear-gradient(180deg, #6ec3f0 0%, #a9ddf3 45%, #ffe9b8 100%);
+  opacity: calc(1 - var(--scroll-progress));
+}
+
+.sky-night {
+  background: linear-gradient(180deg, #0b1024 0%, #161233 55%, #24123f 100%);
+  opacity: var(--scroll-progress);
+}
+
+.sky-sun,
+.sky-moon {
+  position: absolute;
+  top: 10%;
+  width: 200px;
+  height: 200px;
+  left: 50%;
+  border-radius: 50%;
+}
+
+.sky-sun {
+  transform: translate(-190%, calc(var(--scroll-progress) * -45vh));
+  background: radial-gradient(circle at 35% 35%, #fff7d6, var(--color-gold) 60%, rgba(255, 201, 60, 0) 72%);
+  box-shadow: 0 0 140px 46px rgba(255, 201, 60, 0.45);
+  opacity: calc(1 - var(--scroll-progress) * 1.4);
+}
+
+.sky-moon {
+  transform: translate(90%, calc((1 - var(--scroll-progress)) * 45vh));
+  background: radial-gradient(circle at 65% 35%, #fdfdfd, #d7d9e8 55%, rgba(215, 217, 232, 0) 75%);
+  box-shadow: 0 0 100px 30px rgba(215, 217, 232, 0.35);
+  opacity: calc((var(--scroll-progress) - 0.3) * 1.4);
+}
+
+.sky-cloud {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  filter: blur(1px);
+  opacity: calc(0.9 - var(--scroll-progress) * 1.3);
+  animation: cloud-drift 26s ease-in-out infinite;
+}
+
+.sky-cloud::before,
+.sky-cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.sky-cloud-1 { top: 18%; left: 10%; width: 140px; height: 46px; }
+.sky-cloud-1::before { width: 70px; height: 70px; top: -34px; left: 16px; }
+.sky-cloud-1::after { width: 50px; height: 50px; top: -20px; left: 74px; }
+
+.sky-cloud-2 {
+  top: 30%;
+  left: 62%;
+  width: 110px;
+  height: 38px;
+  animation-duration: 32s;
+  animation-delay: -8s;
+}
+.sky-cloud-2::before { width: 56px; height: 56px; top: -26px; left: 12px; }
+.sky-cloud-2::after { width: 40px; height: 40px; top: -16px; left: 58px; }
+
+.sky-cloud-3 {
+  top: 8%;
+  left: 38%;
+  width: 90px;
+  height: 32px;
+  animation-duration: 22s;
+  animation-delay: -4s;
+}
+.sky-cloud-3::before { width: 44px; height: 44px; top: -20px; left: 10px; }
+.sky-cloud-3::after { width: 32px; height: 32px; top: -12px; left: 48px; }
+
+.sky-cloud-4 {
+  top: 45%;
+  left: 20%;
+  width: 120px;
+  height: 40px;
+  animation-duration: 29s;
+  animation-delay: -14s;
+}
+.sky-cloud-4::before { width: 60px; height: 60px; top: -28px; left: 14px; }
+.sky-cloud-4::after { width: 44px; height: 44px; top: -18px; left: 64px; }
+
+.sky-cloud-5 {
+  top: 52%;
+  left: 78%;
+  width: 100px;
+  height: 34px;
+  animation-duration: 24s;
+  animation-delay: -10s;
+}
+.sky-cloud-5::before { width: 50px; height: 50px; top: -22px; left: 12px; }
+.sky-cloud-5::after { width: 36px; height: 36px; top: -14px; left: 54px; }
+
+@keyframes cloud-drift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3vw); }
+}
+
+@media (max-width: 640px) {
+  .sky-sun,
+  .sky-moon {
+    width: 120px;
+    height: 120px;
+  }
+
+  .sky-cloud-1 { width: 90px; height: 30px; }
+  .sky-cloud-2 { width: 70px; height: 24px; }
+  .sky-cloud-3 { width: 60px; height: 20px; }
+  .sky-cloud-4 { width: 80px; height: 26px; }
+  .sky-cloud-5 { width: 66px; height: 22px; }
+}
+
+/* ---------- Fuegos artificiales (fase noche, hacia el final del scroll) --- */
+
+.firework-particle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  z-index: 199;
+  pointer-events: none;
+  animation: firework-burst 1.3s cubic-bezier(0.15, 0.6, 0.3, 1) forwards;
+}
+
+@keyframes firework-burst {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: translate(var(--fx, 60px), var(--fy, -60px)) scale(0.2); opacity: 0; }
 }
 
 /* ---------- Escenas de fondo por capítulo (crossfade con el scroll) ---------- */
@@ -181,19 +343,19 @@ a {
   opacity: 1;
   background:
     radial-gradient(circle at 75% 18%, rgba(255, 201, 60, 0.4) 0%, transparent 35%),
-    linear-gradient(180deg, #12213e 0%, #1c3a5e 38%, #2f6f7a 65%, #3ddad0 100%);
+    linear-gradient(180deg, rgba(18, 33, 62, 0.55) 0%, rgba(28, 58, 94, 0.55) 38%, rgba(47, 111, 122, 0.55) 65%, rgba(61, 218, 208, 0.55) 100%);
 }
 
 .scene-img-plan {
   background:
     radial-gradient(circle at 25% 20%, rgba(255, 235, 170, 0.55) 0%, transparent 40%),
-    linear-gradient(180deg, #ffd166 0%, #ff9a56 45%, #ff6f61 80%, #e8425a 100%);
+    linear-gradient(180deg, rgba(255, 209, 102, 0.55) 0%, rgba(255, 154, 86, 0.55) 45%, rgba(255, 111, 97, 0.55) 80%, rgba(232, 66, 90, 0.55) 100%);
 }
 
 .scene-img-logistica {
   background:
     radial-gradient(circle at 80% 15%, rgba(255, 145, 190, 0.3) 0%, transparent 45%),
-    linear-gradient(180deg, #241b52 0%, #3a1d5f 40%, #7c2f6b 75%, #b34a6f 100%);
+    linear-gradient(180deg, rgba(36, 27, 82, 0.55) 0%, rgba(58, 29, 95, 0.55) 40%, rgba(124, 47, 107, 0.55) 75%, rgba(179, 74, 111, 0.55) 100%);
 }
 
 .scene-img-logistica::after {
@@ -209,7 +371,7 @@ a {
     radial-gradient(circle at 20% 25%, rgba(61, 218, 208, 0.4) 0%, transparent 30%),
     radial-gradient(circle at 78% 65%, rgba(255, 201, 60, 0.35) 0%, transparent 28%),
     radial-gradient(circle at 55% 40%, rgba(255, 95, 109, 0.3) 0%, transparent 26%),
-    linear-gradient(180deg, #0b1024 0%, #161233 55%, #24123f 100%);
+    linear-gradient(180deg, rgba(11, 16, 36, 0.6) 0%, rgba(22, 18, 51, 0.6) 55%, rgba(36, 18, 63, 0.6) 100%);
 }
 
 /* ---------- Progress bar ---------- */
@@ -918,7 +1080,7 @@ a {
 
 @keyframes confetti-fall {
   to {
-    transform: translateY(105vh) rotate(720deg);
+    transform: translate(var(--sway, 0px), 105vh) rotate(720deg);
     opacity: 0.9;
   }
 }
@@ -939,7 +1101,8 @@ a {
   .floaty,
   .btn-primary,
   .hero-scroll-cue,
-  .blob {
+  .blob,
+  .sky-cloud {
     animation: none !important;
   }
 

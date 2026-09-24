@@ -27,6 +27,21 @@
     <span class="stars"></span>
   </div>
 
+  <!-- Cielo día->noche: cada capa se cruza de opacidad según cuánto se ha
+       scrolleado la página, vía la variable CSS --scroll-progress que
+       actualiza js/main.js (ver initProgressBar). -->
+  <div class="sky" aria-hidden="true">
+    <div class="sky-day"></div>
+    <div class="sky-night"></div>
+    <div class="sky-sun"></div>
+    <div class="sky-moon"></div>
+    <div class="sky-cloud sky-cloud-1"></div>
+    <div class="sky-cloud sky-cloud-2"></div>
+    <div class="sky-cloud sky-cloud-3"></div>
+    <div class="sky-cloud sky-cloud-4"></div>
+    <div class="sky-cloud sky-cloud-5"></div>
+  </div>
+
   <div class="scene-images" aria-hidden="true">
     <div class="scene-img scene-img-hero" data-scene-for="hero"></div>
     <div class="scene-img scene-img-plan" data-scene-for="plan"></div>
